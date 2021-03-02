@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GastosController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Gastos
+Route::get( '/gastos', [GastosController::class, 'index'] )->name('gastos');
+Route::post( 'gastos/crear', [ GastosController::class, 'crear' ] )->name( 'gastos.crear' );
+Route::get( '/gastos/cargar', [GastosController::class, 'cargar'] )->name('gastos.cargar');
